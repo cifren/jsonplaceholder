@@ -1,0 +1,47 @@
+{
+  "jobs": [
+    {
+      "id": 1
+    }
+  ],
+  "actions": [
+    {
+      "To": "youtrack",
+      "Name": "addTag",
+      "Arguments": {
+        "youtrackId": "yt_id",
+        "tagName": "nok"
+      },
+      "jobId": 1,
+      "id": 1
+    },
+    {
+      "To": "youtrack",
+      "Name": "removeTag",
+      "Arguments": {
+        "youtrackId": "yt_id",
+        "tagName": "nok"
+      },
+      "jobId": 1,
+      "id": 2
+    }
+  ],
+  "conditions": [
+    {
+      "Name": "equal",
+      "Arguments": "{\"variableName\":\"event.pull_request.state\", \"value\": \"open\"}",
+      "jobId": 1,
+      "id": 1
+    },
+    {
+      "Name": "regex",
+      "Arguments": {
+        "variableName": "event.pull_request.title",
+        "value": "connect-[^-][0-9]*",
+        "persistName": "yt_id"
+      },
+      "jobId": 1,
+      "id": 2
+    }
+  ]
+}

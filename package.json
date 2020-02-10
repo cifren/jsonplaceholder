@@ -23,7 +23,8 @@
     "build:watch": "nodemon --watch build.js --watch templates -e js,md,html build.js",
     "start": "node index",
     "test": "node test/app",
-    "generate-db": "node seed.js"
+    "generate-db": "node seed.js",
+    "generate-db-ghyt-api": "node data/seed-ghyt-api.js"
   },
   "dependencies": {
     "clone": "^1.0.2",
