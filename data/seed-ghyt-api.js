@@ -59,18 +59,20 @@ Factory.define('condition').sequence('id');
 
 //Build
 jobs.forEach(function(jobDef){
-  var jobEntity = Factory.build('job')
-  db.jobs.push(jobEntity)
+  var jobEntity = Factory.build('job', {conditions: [], actions: []})
 
   jobDef.conditions.forEach(function(conditionDef){
     var conditionEntity = Factory.build('condition', {...conditionDef, ...{jobId: jobEntity.id}})
     db.conditions.push(conditionEntity)
+    jobEntity.conditions.push({"id": conditionEntity.id})
   })
 
   jobDef.actions.forEach(function(actionDef){
     var actionEntity = Factory.build('action', {...actionDef, ...{jobId: jobEntity.id}})
     db.actions.push(actionEntity)
+    jobEntity.actions.push({"id": actionEntity.id})
   })
+  db.jobs.push(jobEntity)
 })
 
 fs.writeFileSync('data/db-ghyt-api.json', JSON.stringify(db, null, 2));
