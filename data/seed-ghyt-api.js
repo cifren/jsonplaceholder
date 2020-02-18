@@ -15,7 +15,10 @@ var jobs = [
     'conditions': [
       {
         Name: 'equal',
-        Arguments: '{"variableName":"event.pull_request.state", "value": "open"}',
+        Arguments: {
+          "variableName":"event.pull_request.state",
+          "value": "open"
+        },
       },
       {
         Name: 'regex',
