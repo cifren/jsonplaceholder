@@ -12,6 +12,7 @@ function hex() {
 
 var jobs = [
   {
+    'name': "First Job",
     'conditions': [
       {
         Name: 'equal',
@@ -62,18 +63,18 @@ Factory.define('condition').sequence('id');
 
 //Build
 jobs.forEach(function(jobDef){
-  var jobEntity = Factory.build('job', {conditions: [], actions: []})
+  var jobEntity = Factory.build('job', {name: jobDef.name, conditions: [], actions: []})
 
   jobDef.conditions.forEach(function(conditionDef){
     var conditionEntity = Factory.build('condition', {...conditionDef, ...{jobId: jobEntity.id}})
     db.conditions.push(conditionEntity)
-    jobEntity.conditions.push({"id": conditionEntity.id})
+    jobEntity.conditions.push({...conditionEntity})
   })
 
   jobDef.actions.forEach(function(actionDef){
     var actionEntity = Factory.build('action', {...actionDef, ...{jobId: jobEntity.id}})
     db.actions.push(actionEntity)
-    jobEntity.actions.push({"id": actionEntity.id})
+    jobEntity.actions.push({...actionEntity})
   })
   db.jobs.push(jobEntity)
 })
