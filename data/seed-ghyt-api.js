@@ -15,15 +15,15 @@ var jobs = [
     'name': "First Job",
     'conditions': [
       {
-        Name: 'equal',
-        Arguments: {
+        name: 'equal',
+        arguments: {
           "variableName":"event.pull_request.state",
           "value": "open"
         },
       },
       {
-        Name: 'regex',
-        Arguments: {
+        name: 'regex',
+        arguments: {
           'variableName': 'event.pull_request.title',
           'value': 'connect-[^-][0-9]*',
           'persistName': 'yt_id',
@@ -32,17 +32,17 @@ var jobs = [
     ],
     'actions': [
       {
-        To: 'youtrack',
-        Name: 'addTag',
-        Arguments: {
+        to: 'youtrack',
+        name: 'addTag',
+        arguments: {
           'youtrackId': 'yt_id',
           'tagName': 'nok',
         },
       },
       {
-        To: 'youtrack',
-        Name: 'removeTag',
-        Arguments: {
+        to: 'youtrack',
+        name: 'removeTag',
+        arguments: {
           'youtrackId': 'yt_id',
           'tagName': 'nok',
         },
