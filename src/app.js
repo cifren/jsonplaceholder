@@ -1,10 +1,11 @@
 const jsonServer = require('json-server')
 const clone = require('clone')
 const db = process.env.JSON_DB || 'db.json'
+const readOnly = process.env.READ_ONLY !== 'false'
 const data = require('../data/' + db)
 
 const app = jsonServer.create()
-const router = jsonServer.router(clone(data), { _isFake: true })
+const router = jsonServer.router(clone(data), { _isFake: readOnly })
 
 /*//read-only
 app.use((req, res, next) => {
