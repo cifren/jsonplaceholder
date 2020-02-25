@@ -23,6 +23,7 @@
     "build:watch": "nodemon --watch build.js --watch templates -e js,md,html build.js",
     "start": "node index",
     "test": "unset JSON_DB READ_ONLY && node test/app",
+    "start:notReadOnly": "READ_ONLY=false npm start",
     "generate-db": "node seed.js",
     "generate-db-ghyt-api": "node data/seed-ghyt-api.js"
   },
