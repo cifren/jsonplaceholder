@@ -9,8 +9,7 @@
             "variableName": "event.pull_request.state",
             "value": "open"
           },
-          "jobId": 1,
-          "id": 1
+          "jobId": 1
         },
         {
           "name": "regex",
@@ -19,8 +18,7 @@
             "value": "connect-[^-][0-9]*",
             "persistName": "yt_id"
           },
-          "jobId": 1,
-          "id": 2
+          "jobId": 1
         }
       ],
       "actions": [
@@ -31,8 +29,7 @@
             "youtrackId": "yt_id",
             "tagName": "nok"
           },
-          "jobId": 1,
-          "id": 1
+          "jobId": 1
         },
         {
           "to": "youtrack",
@@ -41,54 +38,36 @@
             "youtrackId": "yt_id",
             "tagName": "nok"
           },
-          "jobId": 1,
-          "id": 2
+          "jobId": 1
         }
       ],
       "id": 1
     }
   ],
-  "actions": [
+  "logs": [
     {
-      "to": "youtrack",
-      "name": "addTag",
-      "arguments": {
-        "youtrackId": "yt_id",
-        "tagName": "nok"
+      "request": {
+        "type": "pull_request",
+        "title": "example"
       },
-      "jobId": 1,
+      "feedback": [
+        {
+          "condition_feedbacks": [
+            {
+              "name": "example1",
+              "result": false,
+              "error_message": ""
+            }
+          ],
+          "action_feedbacks": [
+            {
+              "name": "example1",
+              "error_message": ""
+            }
+          ]
+        }
+      ],
       "id": 1
-    },
-    {
-      "to": "youtrack",
-      "name": "removeTag",
-      "arguments": {
-        "youtrackId": "yt_id",
-        "tagName": "nok"
-      },
-      "jobId": 1,
-      "id": 2
-    }
-  ],
-  "conditions": [
-    {
-      "name": "equal",
-      "arguments": {
-        "variableName": "event.pull_request.state",
-        "value": "open"
-      },
-      "jobId": 1,
-      "id": 1
-    },
-    {
-      "name": "regex",
-      "arguments": {
-        "variableName": "event.pull_request.title",
-        "value": "connect-[^-][0-9]*",
-        "persistName": "yt_id"
-      },
-      "jobId": 1,
-      "id": 2
     }
   ]
 }

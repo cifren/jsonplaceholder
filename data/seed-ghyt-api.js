@@ -51,32 +51,53 @@ var jobs = [
   },
 ];
 
+var log = {
+  request: {
+    type: "pull_request",
+    title: "example"
+  },
+  feedback: [{
+    condition_feedbacks: [
+      {
+        name: "example1",
+        result: false,
+        error_message: ""
+      }
+    ],
+    action_feedbacks: [
+      {
+        name: "example1",
+        error_message: ""
+      }
+    ]
+  }]
+}
+
 // Tables
 db.jobs = [];
-db.actions = [];
-db.conditions = [];
+db.logs = [];
 
 // Factories
 Factory.define('job').sequence('id');
-Factory.define('action').sequence('id');
-Factory.define('condition').sequence('id');
+Factory.define('log').sequence('id');
 
 //Build
 jobs.forEach(function(jobDef){
   var jobEntity = Factory.build('job', {name: jobDef.name, conditions: [], actions: []})
 
   jobDef.conditions.forEach(function(conditionDef){
-    var conditionEntity = Factory.build('condition', {...conditionDef, ...{jobId: jobEntity.id}})
-    db.conditions.push(conditionEntity)
+    var conditionEntity = {...conditionDef, ...{jobId: jobEntity.id}}
     jobEntity.conditions.push({...conditionEntity})
   })
 
   jobDef.actions.forEach(function(actionDef){
-    var actionEntity = Factory.build('action', {...actionDef, ...{jobId: jobEntity.id}})
-    db.actions.push(actionEntity)
+    var actionEntity = {...actionDef, ...{jobId: jobEntity.id}}
     jobEntity.actions.push({...actionEntity})
   })
   db.jobs.push(jobEntity)
 })
+
+var logEntity = Factory.build('log', log)
+db.logs.push(logEntity)
 
 fs.writeFileSync('data/db-ghyt-api.json', JSON.stringify(db, null, 2));
